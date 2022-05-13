@@ -1,0 +1,22 @@
+<div class="post" [id]="'post_'+postData._id">
+  <div class="post__info">
+    <img class="user-avatar" [src]="postData.feedIcon" alt="">
+    <div class="feed-info">
+    <a href="#" class="post-feed">{{postData.feedName}}</a>
+      <div class="posted-at">
+        2h ago
+      </div>
+    </div>
+    </div>
+  <div class="post__body">
+    <div class="post-text" [ngClass]="{'hidden': isReadMore}" >
+    {{postData.text}}
+    </div>
+    <button class="post-more" *ngIf="isReadMore" (click)="isReadMore = false">Read More</button>
+    </div>
+
+  <app-posted-as [sign]="postData.sign"></app-posted-as>
+  <div class="post__actions">
+    <app-reactions></app-reactions>
+  </div>
+</div>

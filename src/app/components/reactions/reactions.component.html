@@ -1,0 +1,16 @@
+<div style="display: flex" (mouseenter)="showReactions = true" (mouseleave)="showReactions=false">
+<button class="btn-reaction">
+  <span class="reaction">❤️</span>
+  <span class="likes">3</span>
+</button>
+
+<div class="reactions__wrapper" *ngIf="showReactions">
+  <ul class="reactions__select">
+    <li class="reaction-icon">❤️</li>
+    <li class="reaction-icon">👍</li>
+    <li class="reaction-icon">💡</li>
+    <li class="reaction-icon">😂</li>
+    <li class="reaction-icon">🌟</li>
+  </ul>
+</div>
+</div>
