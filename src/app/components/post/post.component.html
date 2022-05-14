@@ -9,14 +9,14 @@
     </div>
     </div>
   <div class="post__body">
-    <div class="post-text" [ngClass]="{'hidden': isReadMore}" >
-    {{postData.text}}
+    <div class="post-text" >
+    {{isReadMore ? (postData.text | slice:0:TEXT_MAX_CHARS) : postData.text}}
+      <span *ngIf="isReadMore">...</span>
     </div>
-    <button class="post-more" *ngIf="isReadMore" (click)="isReadMore = false">Read More</button>
+    <button class="post-more" *ngIf="isReadMore" (click)="unfoldText()">Read More</button>
     </div>
-
   <app-posted-as [sign]="postData.sign"></app-posted-as>
   <div class="post__actions">
-    <app-reactions></app-reactions>
+    <app-reactions (reactionChange)="changeReactionCounter($event)" [totalReactions]="postData.likesCount" [reactionCounters]="postData.reactionCounters"></app-reactions>
   </div>
 </div>

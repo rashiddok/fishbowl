@@ -7,6 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { IFeedPost } from '../../shared/models/IFeedPost';
+import { Reactions } from '../../shared/enums/Reactions';
 
 @Component({
   selector: 'app-post',
@@ -17,25 +18,31 @@ import { IFeedPost } from '../../shared/models/IFeedPost';
 })
 export class PostComponent implements AfterViewInit {
   @Input() postData!: IFeedPost;
-  isReadMore: boolean = true;
+  public isReadMore: boolean = true;
+  public readonly TEXT_MAX_CHARS: number = 250;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
-    if (this.calculateTextLines() < 4) {
+    if (this.calculateTextWords() < this.TEXT_MAX_CHARS) {
       this.isReadMore = false;
       this.cdr.detectChanges();
     }
   }
 
-  private calculateTextLines(): number {
-    const textElement = document.querySelector(
-      `#post_${this.postData._id} .post-text`
-    ) as HTMLElement;
-    let divHeight: number = textElement.offsetHeight;
-    let lineHeight: number = parseFloat(
-      getComputedStyle(textElement, null).lineHeight
-    );
-    return Math.round(divHeight / lineHeight);
+  private calculateTextWords(): number {
+    return this.postData.text.length;
+  }
+
+  public unfoldText() {
+    this.isReadMore = false;
+  }
+
+  public changeReactionCounter(reaction: Reactions) {
+    if (reaction === undefined) {
+      this.postData.likesCount--;
+      return;
+    }
+    this.postData.likesCount++;
   }
 }

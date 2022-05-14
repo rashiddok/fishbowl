@@ -22,7 +22,7 @@
     }
     .post-feed{
       text-decoration: none;
-      color: var(--text_link);
+      color: var(--text_steel);
     }
     .posted-at{
       font-weight: normal;
@@ -42,9 +42,9 @@
       }
     }
     .post-more{
-      margin-top: 1rem;
-      color: var(--text_link);
+      color: var(--text_steel-light);
       background: unset;
+      line-height: 1.3rem;
       padding: 0;
       font-weight: 500;
       cursor: pointer;

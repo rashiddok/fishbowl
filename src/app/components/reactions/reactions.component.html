@@ -1,16 +1,12 @@
 <div style="display: flex" (mouseenter)="showReactions = true" (mouseleave)="showReactions=false">
-<button class="btn-reaction">
-  <span class="reaction">❤️</span>
-  <span class="likes">3</span>
+<button class="btn-reaction" [ngClass]="{'reacted': userReaction}" (click)="toggleReaction()">
+  <span class="reaction">{{userReaction ? pickEmoji(userReaction) : DEFAULT_REACTION}}️</span>
+  <span class="likes">{{totalReactions}}</span>
 </button>
 
 <div class="reactions__wrapper" *ngIf="showReactions">
   <ul class="reactions__select">
-    <li class="reaction-icon">❤️</li>
-    <li class="reaction-icon">👍</li>
-    <li class="reaction-icon">💡</li>
-    <li class="reaction-icon">😂</li>
-    <li class="reaction-icon">🌟</li>
+    <li class="reaction-icon" *ngFor="let reaction of availableReactions | keyvalue" (click)="setReaction(reaction.key)">{{reaction.value}}</li>
   </ul>
 </div>
 </div>

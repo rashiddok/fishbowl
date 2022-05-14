@@ -15,6 +15,9 @@ app-reactions{
     color: var(--text_primary);
     font-weight: 500;
   }
+  &.reacted{
+    background: var(--content_tint-hovered);
+  }
 }
 
 .reactions{

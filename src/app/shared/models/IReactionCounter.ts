@@ -1,7 +1,9 @@
+import { Reactions } from '../enums/Reactions';
+
 export interface IReactionCounter {
-  like: number;
-  helpful: number;
-  smart: number;
-  funny: number;
-  uplifting: number;
+  [Reactions.funny]: number;
+  [Reactions.helpful]: number;
+  [Reactions.smart]: number;
+  [Reactions.uplifting]: number;
+  [Reactions.like]: number;
 }
