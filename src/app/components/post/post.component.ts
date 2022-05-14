@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { IFeedPost } from '../../shared/models/IFeedPost';
 import { Reactions } from '../../shared/enums/Reactions';
+import timeAgo from '../../shared/helpers/timeago';
 
 @Component({
   selector: 'app-post',
@@ -19,6 +20,7 @@ import { Reactions } from '../../shared/enums/Reactions';
 export class PostComponent implements AfterViewInit {
   @Input() postData!: IFeedPost;
   public isReadMore: boolean = true;
+  public formatedDate!: string;
   public readonly TEXT_MAX_CHARS: number = 250;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -26,8 +28,9 @@ export class PostComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     if (this.calculateTextWords() < this.TEXT_MAX_CHARS) {
       this.isReadMore = false;
-      this.cdr.detectChanges();
     }
+    this.formatedDate = timeAgo(this.postData.date);
+    this.cdr.detectChanges();
   }
 
   private calculateTextWords(): number {
