@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'infinite-scroll',
+  selector: 'app-infinite-scroll',
   template: `<ng-content></ng-content>
     <div #anchor></div>`,
 })

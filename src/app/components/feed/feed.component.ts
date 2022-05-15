@@ -8,14 +8,14 @@ import IMetaCard from '../../shared/models/IMetaCard';
   selector: 'app-feed',
   styleUrls: ['feed.component.scss'],
   template: ` <div class="feed">
-    <infinite-scroll (scrolled)="onScroll()">
+    <app-infinite-scroll (scrolled)="onScroll()">
       <ng-container *ngFor="let post of posts | async; let i = index">
         <ng-container *ngIf="isMetaInArray(i) | async as metaCard">
           <app-meta [meta]="metaCard"></app-meta>
         </ng-container>
         <app-post [postData]="post"></app-post>
       </ng-container>
-    </infinite-scroll>
+    </app-infinite-scroll>
   </div>`,
 })
 export class FeedComponent implements OnInit {
