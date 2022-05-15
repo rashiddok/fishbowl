@@ -1,3 +1,5 @@
+import { QuizAnswer } from './QuizAnswer';
+
 interface IMetaContentResultsUI {
   resultsTitle: string;
   resultsSubtitle: string;
@@ -5,18 +7,17 @@ interface IMetaContentResultsUI {
   resultsButtonDeeplink: string;
 }
 
-interface IMetaContent {
+export interface IMetaContent {
   resultsUi: IMetaContentResultsUI;
   arrowEnabled: boolean;
   titleColor: string;
   backgroundColor: string;
   textColor: string;
-  answers: [];
+  answers: QuizAnswer[];
   showResults: boolean;
   showHelpLink: boolean;
   title: string;
   text: string;
-  imageUrl: string;
 }
 
 export default interface IMetaCard {
