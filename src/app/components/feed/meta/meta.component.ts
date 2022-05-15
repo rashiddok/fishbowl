@@ -4,7 +4,7 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import IMetaCard from '../../shared/models/IMetaCard';
+import IMetaCard from '../../../shared/models/IMetaCard';
 
 @Component({
   selector: 'app-meta',

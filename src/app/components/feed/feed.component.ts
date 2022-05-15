@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, find, mergeMap, Observable } from 'rxjs';
-import { IFeedPost } from '../shared/models/IFeedPost';
+import { IFeedPost } from '../../shared/models/IFeedPost';
 import { PostsStore } from './state/posts.store';
-import IMetaCard from '../shared/models/IMetaCard';
+import IMetaCard from '../../shared/models/IMetaCard';
 
 @Component({
   selector: 'app-feed',
-  styleUrls: ['posts.component.scss'],
+  styleUrls: ['feed.component.scss'],
   template: ` <div class="feed">
     <infinite-scroll (scrolled)="onScroll()">
       <ng-container *ngFor="let post of posts | async; let i = index">
@@ -18,7 +18,7 @@ import IMetaCard from '../shared/models/IMetaCard';
     </infinite-scroll>
   </div>`,
 })
-export class PostsComponent implements OnInit {
+export class FeedComponent implements OnInit {
   private readonly _posts!: BehaviorSubject<IFeedPost[]>;
   posts!: Observable<IFeedPost[]>;
   meta: Observable<IMetaCard[]>;

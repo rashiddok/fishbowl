@@ -5,9 +5,9 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import { IFeedPost } from '../../shared/models/IFeedPost';
-import { Reactions } from '../../shared/enums/Reactions';
-import timeAgo from '../../shared/helpers/timeago';
+import { IFeedPost } from '../../../shared/models/IFeedPost';
+import { Reactions } from '../../../shared/enums/Reactions';
+import timeAgo from '../../../shared/helpers/timeago';
 
 @Component({
   selector: 'app-post',
