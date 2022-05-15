@@ -17,6 +17,6 @@
     </div>
   <app-posted-as [sign]="postData.sign"></app-posted-as>
   <div class="post__actions">
-    <app-reactions (reactionChange)="changeReactionCounter($event)" [totalReactions]="postData.likesCount" [reactionCounters]="postData.reactionCounters"></app-reactions>
+    <app-reactions (reactionChange)="changeReactionCounter($event)" [totalReactions]="postData.likesCount"></app-reactions>
   </div>
 </div>

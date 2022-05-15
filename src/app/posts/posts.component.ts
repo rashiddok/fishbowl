@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../shared/api.service';
-import { BehaviorSubject, find, mergeMap, Observable, tap } from 'rxjs';
+import { BehaviorSubject, find, mergeMap, Observable } from 'rxjs';
 import { IFeedPost } from '../shared/models/IFeedPost';
 import { PostsStore } from './state/posts.store';
 import IMetaCard from '../shared/models/IMetaCard';

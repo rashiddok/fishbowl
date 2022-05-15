@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -7,60 +6,52 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  IUserReaction,
-  ReactionIcons,
-  Reactions,
-} from '../../shared/enums/Reactions';
-import { IReactionCounter } from '../../shared/models/IReactionCounter';
+import { Reactions } from '../../shared/enums/Reactions';
+import { AvailableReaction } from './models/AvailableReaction';
+
+enum ReactionIcons {
+  like = '❤',
+  helpful = '👍',
+  smart = '💡',
+  funny = '😂',
+  uplifting = '🌟',
+}
 
 @Component({
   selector: 'app-reactions',
   templateUrl: './reactions.component.html',
   styleUrls: ['./reactions.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class ReactionsComponent implements AfterViewInit {
-  @Input() totalReactions!: number;
-  @Input() reactionCounters!: IReactionCounter;
-  @Output() reactionChange: EventEmitter<Reactions> =
-    new EventEmitter<Reactions>();
-  readonly DEFAULT_REACTION = ReactionIcons.like;
+export class ReactionsComponent {
+  @Input() totalReactions: number = 0;
+  @Output() reactionChange: EventEmitter<string> = new EventEmitter<string>();
   showReactions: boolean = false;
-  userReaction: Reactions | undefined;
-  availableReactions: IUserReaction = {};
-  constructor() {}
-
-  ngAfterViewInit(): void {
-    //TODO: Rework to switch case
-    const reactions: string[][] = Object.keys(this.reactionCounters).map(
-      (x) => [
-        x,
-        // @ts-ignore
-        ReactionIcons[x],
-      ]
-    );
-    this.availableReactions = Object.fromEntries(reactions);
-  }
+  userReaction: AvailableReaction | undefined;
+  readonly DEFAULT_REACTION: AvailableReaction = new AvailableReaction(
+    Reactions.like,
+    ReactionIcons.like
+  );
+  availableReactions: AvailableReaction[] = [
+    this.DEFAULT_REACTION,
+    new AvailableReaction(Reactions.helpful, ReactionIcons.helpful),
+    new AvailableReaction(Reactions.smart, ReactionIcons.smart),
+    new AvailableReaction(Reactions.funny, ReactionIcons.funny),
+    new AvailableReaction(Reactions.uplifting, ReactionIcons.uplifting),
+  ];
 
   toggleReaction() {
     if (this.userReaction) {
       this.setReaction(undefined);
       return;
     }
-    this.setReaction(Reactions.like);
+    this.setReaction(new AvailableReaction(Reactions.like, ReactionIcons.like));
   }
 
-  setReaction(reaction: Reactions | string | undefined) {
-    const rect: Reactions = reaction as Reactions;
-    this.userReaction = rect;
+  setReaction(reaction: AvailableReaction | undefined) {
+    this.userReaction = reaction;
     this.showReactions = false;
-    //TODO: This one should emit previous reaction
-    this.reactionChange.emit(rect);
-  }
-
-  pickEmoji(value: Reactions) {
-    return ReactionIcons[value];
+    this.reactionChange.emit(reaction?.name);
   }
 }

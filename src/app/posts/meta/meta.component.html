@@ -1,7 +1,7 @@
 <div class="card" [style]="{'backgroundColor': meta.content.backgroundColor}" *ngIf="!isResults else results">
   <div class="card__title" [style]="{'color': meta.content.titleColor}">{{meta.content.title}}</div>
   <div class="card__text" [style]="{'color': meta.content.textColor}">{{meta.content.text}}</div>
-  <div class="card__content" *ngIf="!isResults else results">
+  <div class="card__content">
     <app-quiz *ngIf="meta.type === 2" [quiz]="meta.content.answers" (answerSubmitted)="handleQuizAnswer($event)"></app-quiz>
   </div>
 </div>

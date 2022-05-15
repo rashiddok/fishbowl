@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { IFeedPost } from '../../shared/models/IFeedPost';
 import { Reactions } from '../../shared/enums/Reactions';
@@ -15,12 +14,12 @@ import timeAgo from '../../shared/helpers/timeago';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
 })
 export class PostComponent implements AfterViewInit {
   @Input() postData!: IFeedPost;
   public isReadMore: boolean = true;
   public formatedDate!: string;
+  private hasUserReaction: boolean = false;
   public readonly TEXT_MAX_CHARS: number = 250;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -41,11 +40,17 @@ export class PostComponent implements AfterViewInit {
     this.isReadMore = false;
   }
 
-  public changeReactionCounter(reaction: Reactions) {
+  public changeReactionCounter(reaction: string) {
     if (reaction === undefined) {
+      this.hasUserReaction = false;
       this.postData.likesCount--;
       return;
     }
+    if (this.hasUserReaction) {
+      //http request
+      return;
+    }
     this.postData.likesCount++;
+    this.hasUserReaction = true;
   }
 }

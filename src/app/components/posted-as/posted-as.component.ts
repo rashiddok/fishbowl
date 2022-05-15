@@ -3,8 +3,20 @@ import { IUserSign, SignText } from '../../shared/models/IUserSign';
 
 @Component({
   selector: 'app-posted-as',
-  templateUrl: './posted-as.component.html',
-  styleUrls: ['./posted-as.component.scss'],
+  template: `
+    <div class="posted-as">
+      {{ userSign }}
+    </div>
+  `,
+  styles: [
+    `
+      .posted-as {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text_steel);
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostedAsComponent {

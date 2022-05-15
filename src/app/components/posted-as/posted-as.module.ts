@@ -4,7 +4,7 @@ import { PostedAsComponent } from './posted-as.component';
 
 @NgModule({
   declarations: [PostedAsComponent],
-  exports: [PostedAsComponent],
   imports: [CommonModule],
+  exports: [PostedAsComponent],
 })
 export class PostedAsModule {}

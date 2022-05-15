@@ -15,15 +15,13 @@ import { QuizAnswer } from '../../shared/models/QuizAnswer';
   styleUrls: ['./quiz.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuizComponent implements AfterViewInit {
+export class QuizComponent {
   @Input() quiz!: QuizAnswer[];
   @Output() answerSubmitted: EventEmitter<string> = new EventEmitter<string>();
   quizForm: FormGroup = new FormGroup({
     answer: new FormControl('', [Validators.required]),
   });
   constructor() {}
-
-  ngAfterViewInit() {}
 
   onSubmit() {
     this.answerSubmitted.emit(this.quizForm.get('answer')?.value);

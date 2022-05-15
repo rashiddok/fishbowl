@@ -5,15 +5,3 @@ export enum Reactions {
   funny = 'funny',
   uplifting = 'uplifting',
 }
-
-export interface IUserReaction {
-  [key: string]: string;
-}
-
-export enum ReactionIcons {
-  like = '❤',
-  helpful = '👍',
-  smart = '💡',
-  funny = '😂',
-  uplifting = '🌟',
-}
