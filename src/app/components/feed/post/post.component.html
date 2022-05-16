@@ -2,21 +2,25 @@
   <div class="post__info">
     <img class="user-avatar" [src]="postData.feedIcon" alt="">
     <div class="feed-info">
-    <a href="#" class="post-feed">{{postData.feedName}}</a>
+      <a href="#" class="post-feed">{{postData.feedName}}</a>
       <div class="posted-at">
         {{formatedDate}}
       </div>
     </div>
-    </div>
+  </div>
   <div class="post__body">
-    <div class="post-text" >
-    {{isReadMore ? (postData.text | slice:0:TEXT_MAX_CHARS) : postData.text}}
+    <div class="post-text">
+      {{isReadMore ? (postData.text | slice:0:TEXT_MAX_CHARS) : postData.text}}
       <span *ngIf="isReadMore">...</span>
     </div>
     <button class="post-more" *ngIf="isReadMore" (click)="unfoldText()">Read More</button>
-    </div>
+    <ng-container *ngIf="postData.messageType === 1">
+      <img [src]="postData.messageData?.url" alt="" class="post__image">
+    </ng-container>
+  </div>
   <app-posted-as [sign]="postData.sign"></app-posted-as>
   <div class="post__actions">
-    <app-reactions (reactionChange)="changeReactionCounter($event)" [totalReactions]="postData.likesCount"></app-reactions>
+    <app-reactions (reactionChange)="changeReactionCounter($event)"
+                   [totalReactions]="postData.likesCount"></app-reactions>
   </div>
 </div>

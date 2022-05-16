@@ -32,6 +32,9 @@
   &__body{
     margin-top: 1rem;
     margin-bottom: .5rem;
+    word-break: break-word;
+    display: flex;
+    flex-direction: column;
     .post-text{
       color: var(--text_secondary);
       line-height: 1.3rem;
@@ -50,6 +53,12 @@
       font-weight: 500;
       cursor: pointer;
     }
+  }
+  &__image{
+    max-width: 100%;
+    max-height: 15rem;
+    margin: .5rem auto 0 auto;
+    object-fit: contain;
   }
   &__actions{
     display: flex;
