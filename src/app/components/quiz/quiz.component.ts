@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -21,7 +20,6 @@ export class QuizComponent {
   quizForm: FormGroup = new FormGroup({
     answer: new FormControl('', [Validators.required]),
   });
-  constructor() {}
 
   onSubmit() {
     this.answerSubmitted.emit(this.quizForm.get('answer')?.value);

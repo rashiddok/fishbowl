@@ -15,13 +15,12 @@ import IMetaCard from '../../../shared/models/IMetaCard';
 export class MetaComponent implements AfterViewInit {
   @Input() meta!: IMetaCard;
   public isResults = false;
-  constructor() {}
 
   ngAfterViewInit() {
     console.log(this.meta);
   }
 
-  handleQuizAnswer(value: string) {
+  handleQuizAnswer(_value: string) {
     this.showResults();
   }
 

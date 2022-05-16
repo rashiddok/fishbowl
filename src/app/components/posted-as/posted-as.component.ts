@@ -21,7 +21,6 @@ import { IUserSign, SignText } from '../../shared/models/IUserSign';
 })
 export class PostedAsComponent {
   @Input() sign!: IUserSign;
-  constructor() {}
 
   get userSign(): string | undefined {
     switch (this.sign.signType) {

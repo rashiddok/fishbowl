@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -13,6 +14,7 @@ import {
   selector: 'app-infinite-scroll',
   template: `<ng-content></ng-content>
     <div #anchor></div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfiniteScrollComponent implements AfterViewInit, OnDestroy {
   @Input() options = {};
