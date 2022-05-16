@@ -1,0 +1,15 @@
+<div class="quiz">
+  <div class="quiz__variants" [formGroup]="quizForm">
+    <div class="quiz__answer" *ngFor="let answer of quiz">
+      <input
+             type="radio"
+             class="quiz__answer-input"
+             [value]="answer.variant"
+             [id]="answer._id"
+             name="answer"
+             formControlName="answer">
+      <label class="quiz__answer-label" [for]="answer._id">{{answer.text}}</label>
+    </div>
+    <input [disabled]="quizForm.invalid" (click)="onSubmit()" class="quiz__submit" type="submit" value="Submit">
+  </div>
+</div>

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --content_tint_background: #f0f2f5;
+  --content_tint-hovered: #99a2ad;
+  --text_primary: #111111;
+  --background: #edeef0;
+  --text_secondary: #534E5C;
+  --text_steel: #2A5885;
+  --text_steel-light: #4a76a8
+}
+
+body{
+  background: var(--background);
+  font-family: Inter, sans-serif;
+  padding-bottom: 10rem;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+button{
+  outline: unset;
+  border: unset;
+}

@@ -1,0 +1,12 @@
+<div style="display: flex" (mouseenter)="showReactions = true" (mouseleave)="showReactions=false">
+<button class="btn-reaction" [ngClass]="{'reacted': userReaction}" (click)="toggleReaction()">
+  <span class="reaction">{{userReaction ? userReaction.icon : DEFAULT_REACTION.icon}}️</span>
+  <span class="likes">{{totalReactions}}</span>
+</button>
+
+<div class="reactions__wrapper" *ngIf="showReactions">
+  <ul class="reactions__select">
+    <li class="reaction-icon" *ngFor="let reaction of availableReactions" (click)="setReaction(reaction)">{{reaction.icon}}</li>
+  </ul>
+</div>
+</div>
