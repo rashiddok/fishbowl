@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { map, Observable } from 'rxjs';
+import { map, Observable, retry } from 'rxjs';
 import IMetaCard from './models/IMetaCard';
 import { IFeedPost } from './models/IFeedPost';
 
@@ -18,7 +18,10 @@ export class ApiService {
       .get<any>(
         `${this.API_URL}/v4/feed/consolidated/posts?count=${count}&start=${start}`
       )
-      .pipe(map((data) => data.posts));
+      .pipe(
+        map((data) => data.posts),
+        retry(2)
+      );
   }
 
   public fetchMeta(): Observable<IMetaCard[]> {
@@ -26,7 +29,8 @@ export class ApiService {
       .get<{ cards: IMetaCard[] }>(`${this.API_URL}/v4/feed/consolidated/meta`)
       .pipe(
         map((data) => data.cards),
-        map((data) => data.filter((x) => [0, 2].includes(x.type)))
+        map((data) => data.filter((x) => [0, 2].includes(x.type))),
+        retry(2)
       );
   }
 }

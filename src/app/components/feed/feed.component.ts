@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, find, mergeMap, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, filter, mergeMap, Observable, scan } from 'rxjs';
 import { IFeedPost } from '../../shared/models/IFeedPost';
 import { PostsStore } from './state/posts.store';
 import IMetaCard from '../../shared/models/IMetaCard';
@@ -7,9 +7,12 @@ import IMetaCard from '../../shared/models/IMetaCard';
 @Component({
   selector: 'app-feed',
   styleUrls: ['feed.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <div class="feed">
     <app-infinite-scroll (scrolled)="onScroll()">
-      <ng-container *ngFor="let post of posts | async; let i = index">
+      <ng-container
+        *ngFor="let post of posts | async; trackBy: trackByFunc; let i = index"
+      >
         <ng-container *ngIf="isMetaInArray(i) | async as metaCard">
           <app-meta [meta]="metaCard"></app-meta>
         </ng-container>
@@ -38,17 +41,24 @@ export class FeedComponent implements OnInit {
     this.postsStore.fetchInitialData();
   }
 
-  isMetaInArray(index: number): Observable<IMetaCard | undefined> {
+  trackByFunc(_index: number, item: IFeedPost) {
+    return item._id;
+  }
+
+  isMetaInArray(index: number): Observable<IMetaCard> {
     return this.meta.pipe(
       mergeMap((data) => data),
-      find((data) => {
-        return data.position === index;
+      filter((data) => data.position === index),
+      scan((acc, data) => {
+        if (acc === undefined || acc.position >= data?.position) {
+          return data;
+        }
+        return acc;
       })
     );
   }
 
   fetchPosts() {
-    console.log(`fetching: page ${this.currentPage} count: ${this.fetchCount}`);
     this.postsStore.fetchPosts(this.currentPage, this.fetchCount);
   }
 }

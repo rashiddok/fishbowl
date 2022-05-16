@@ -1,9 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import IMetaCard from '../../../shared/models/IMetaCard';
 
 @Component({
@@ -12,13 +7,9 @@ import IMetaCard from '../../../shared/models/IMetaCard';
   styleUrls: ['./meta.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MetaComponent implements AfterViewInit {
+export class MetaComponent {
   @Input() meta!: IMetaCard;
   public isResults = false;
-
-  ngAfterViewInit() {
-    console.log(this.meta);
-  }
 
   handleQuizAnswer(_value: string) {
     this.showResults();

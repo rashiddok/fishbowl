@@ -1,5 +1,14 @@
 .feed{
   max-width: 600px;
   padding: 10px;
-  margin: 0 auto
+  margin: 0 auto;
 }
+app-post, app-meta{
+  display: block;
+  margin-top: 1rem;
+  &:first-child{
+    margin-top: 0;
+  }
+}
+
+

@@ -13,13 +13,15 @@ export class PostsStore {
   constructor(private apiService: ApiService) {}
 
   fetchInitialData(start: number = 0, count: number = 10) {
-    //TODO: ADD ERROR HANDLER
     combineLatest([
       this.apiService.fetchPosts(start, count),
       this.apiService.fetchMeta(),
-    ]).subscribe(([posts, meta]) => {
-      this.postsData.next([...this.postsData.getValue(), ...posts]);
-      this.metaData.next([...this.metaData.getValue(), ...meta]);
+    ]).subscribe({
+      next: ([posts, meta]) => {
+        this.postsData.next([...this.postsData.getValue(), ...posts]);
+        this.metaData.next([...this.metaData.getValue(), ...meta]);
+      },
+      error: (err) => console.error(err),
     });
   }
 
