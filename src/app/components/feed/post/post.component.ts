@@ -1,9 +1,8 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
+  OnInit,
 } from '@angular/core';
 import { IFeedPost } from '../../../shared/models/IFeedPost';
 import timeAgo from '../../../shared/helpers/timeago';
@@ -14,21 +13,20 @@ import timeAgo from '../../../shared/helpers/timeago';
   styleUrls: ['./post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent implements AfterViewInit {
+export class PostComponent implements OnInit {
   @Input() postData!: IFeedPost;
   public isReadMore: boolean = true;
   public formatedDate!: string;
   private hasUserReaction: boolean = false;
   public readonly TEXT_MAX_CHARS: number = 250;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
-  ngAfterViewInit(): void {
+  ngOnInit() {
     if (this.calculateTextWords() < this.TEXT_MAX_CHARS) {
       this.isReadMore = false;
     }
     this.formatedDate = timeAgo(this.postData.date);
-    this.cdr.detectChanges();
   }
 
   private calculateTextWords(): number {

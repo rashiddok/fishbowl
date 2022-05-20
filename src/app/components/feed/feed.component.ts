@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, filter, mergeMap, Observable, scan } from 'rxjs';
 import { IFeedPost } from '../../shared/models/IFeedPost';
 import { PostsStore } from './state/posts.store';
@@ -7,7 +7,6 @@ import IMetaCard from '../../shared/models/IMetaCard';
 @Component({
   selector: 'app-feed',
   styleUrls: ['feed.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <div class="feed">
     <app-infinite-scroll (scrolled)="onScroll()">
       <ng-container
