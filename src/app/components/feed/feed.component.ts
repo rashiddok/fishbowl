@@ -7,17 +7,15 @@ import IMetaCard from '../../shared/models/IMetaCard';
 @Component({
   selector: 'app-feed',
   styleUrls: ['feed.component.scss'],
-  template: ` <div class="feed">
-    <app-infinite-scroll (scrolled)="onScroll()">
-      <ng-container
-        *ngFor="let post of posts | async; trackBy: trackByFunc; let i = index"
-      >
-        <ng-container *ngIf="isMetaInArray(i) | async as metaCard">
-          <app-meta [meta]="metaCard"></app-meta>
-        </ng-container>
-        <app-post [postData]="post"></app-post>
+  template: ` <div class="feed" appScrolledBottom (scrolled)="onScroll()">
+    <ng-container
+      *ngFor="let post of posts | async; trackBy: trackByFunc; let i = index"
+    >
+      <ng-container *ngIf="isMetaInArray(i) | async as metaCard">
+        <app-meta [meta]="metaCard"></app-meta>
       </ng-container>
-    </app-infinite-scroll>
+      <app-post [postData]="post"></app-post>
+    </ng-container>
   </div>`,
 })
 export class FeedComponent implements OnInit {
