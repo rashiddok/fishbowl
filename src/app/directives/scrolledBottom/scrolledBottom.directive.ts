@@ -11,7 +11,7 @@ import {
   selector: '[appScrolledBottom]',
 })
 export class ScrolledBottomDirective implements AfterViewInit, OnDestroy {
-  @Output() scrolled = new EventEmitter();
+  @Output() appScrolledBottom = new EventEmitter();
 
   private observer!: IntersectionObserver;
 
@@ -27,7 +27,7 @@ export class ScrolledBottomDirective implements AfterViewInit, OnDestroy {
     };
 
     this.observer = new IntersectionObserver(([entry]) => {
-      entry.isIntersecting && this.scrolled.emit();
+      entry.isIntersecting && this.appScrolledBottom.emit();
     }, options);
     const watchElement = this.createWatchElement();
     this.observer.observe(watchElement);

@@ -7,7 +7,7 @@ import IMetaCard from '../../shared/models/IMetaCard';
 @Component({
   selector: 'app-feed',
   styleUrls: ['feed.component.scss'],
-  template: ` <div class="feed" appScrolledBottom (scrolled)="onScroll()">
+  template: ` <div class="feed" (appScrolledBottom)="onScroll()">
     <ng-container
       *ngFor="let post of posts | async; trackBy: trackByFunc; let i = index"
     >
