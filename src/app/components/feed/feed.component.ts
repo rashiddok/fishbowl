@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, filter, mergeMap, Observable, scan } from 'rxjs';
 import { IFeedPost } from '../../shared/models/IFeedPost';
 import { PostsStore } from './state/posts.store';
@@ -7,18 +7,15 @@ import IMetaCard from '../../shared/models/IMetaCard';
 @Component({
   selector: 'app-feed',
   styleUrls: ['feed.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <div class="feed">
-    <app-infinite-scroll (scrolled)="onScroll()">
-      <ng-container
-        *ngFor="let post of posts | async; trackBy: trackByFunc; let i = index"
-      >
-        <ng-container *ngIf="isMetaInArray(i) | async as metaCard">
-          <app-meta [meta]="metaCard"></app-meta>
-        </ng-container>
-        <app-post [postData]="post"></app-post>
+  template: ` <div class="feed" (appScrolledBottom)="onScroll()">
+    <ng-container
+      *ngFor="let post of posts | async; trackBy: trackByFunc; let i = index"
+    >
+      <ng-container *ngIf="isMetaInArray(i) | async as metaCard">
+        <app-meta [meta]="metaCard"></app-meta>
       </ng-container>
-    </app-infinite-scroll>
+      <app-post [postData]="post"></app-post>
+    </ng-container>
   </div>`,
 })
 export class FeedComponent implements OnInit {

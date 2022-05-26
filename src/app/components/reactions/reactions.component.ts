@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Input,
   Output,
-  ViewEncapsulation,
 } from '@angular/core';
 import { Reactions } from '../../shared/enums/Reactions';
 import { AvailableReaction } from './models/AvailableReaction';
@@ -22,7 +21,6 @@ enum ReactionIcons {
   templateUrl: './reactions.component.html',
   styleUrls: ['./reactions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
 })
 export class ReactionsComponent {
   @Input() totalReactions: number = 0;
